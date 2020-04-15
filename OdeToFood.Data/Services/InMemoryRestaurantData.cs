@@ -24,7 +24,8 @@ namespace OdeToFood.Data.Services
             restaurants.Add(restaurant);
             restaurant.Id = restaurants.Max(r => r.Id)+1;
         }
-        
+
+
         public Restaurant Get(int Id)
         {
             return restaurants.FirstOrDefault(r => r.Id == Id);
@@ -42,6 +43,15 @@ namespace OdeToFood.Data.Services
             {
                 existing.Name = restaurant.Name;
                 existing.Cuisine = restaurant.Cuisine;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            var restarurant = Get(id);
+            if(restarurant != null)
+            {
+                restaurants.Remove(restarurant);
             }
         }
 

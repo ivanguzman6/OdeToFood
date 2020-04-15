@@ -92,5 +92,25 @@ namespace OdeToFood.Web.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult Delete(int Id)
+        {
+            var model = db.Get(Id);
+            if (model == null)
+            {
+                return View("NotFound");
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        /*FormCollection form: esto me da un parametro adicional para diferenciar este metodo con el otro Get del mismo nombre y parametro*/
+        public ActionResult Delete(int id, FormCollection form)
+        {
+            db.Delete(id);
+            return RedirectToAction("Index");
+        }
+
     }
 }
